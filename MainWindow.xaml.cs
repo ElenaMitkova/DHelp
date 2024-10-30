@@ -25,7 +25,7 @@ namespace DHelp
             InitializeComponent();
             MenuCB.IsEnabled = true;
             MenuCB.Items.Add(new ComboBoxItem() { Content = "Feedback" });
-            
+            MenuCB.Items.Add(new ComboBoxItem() { Content = "Symptoms" });
           
             //if (MenuCB.SelectedIndex < 0)
             //{
@@ -39,16 +39,21 @@ namespace DHelp
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (MenuCB.SelectedItem==FeedbackGB)
-            {
-                FeedbackGB.Visibility=Visibility.Hidden;
-            }
 
         }
 
         private void MenuCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (MenuCB.SelectedIndex == 0)
+            {
+                FeedbackGB.Visibility = Visibility.Visible;
+                SymptomsGB.Visibility = Visibility.Hidden;
+            }
+            else if (MenuCB.SelectedIndex == 1)
+            {
+                FeedbackGB.Visibility = Visibility.Hidden;
+                SymptomsGB.Visibility = Visibility.Visible;
+            }
         }
     }
 }

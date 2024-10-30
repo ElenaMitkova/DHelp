@@ -6,65 +6,133 @@
         xmlns:local="clr-namespace:DHelp"
         mc:Ignorable="d"
         Title="MainWindow" Height="765" Width="1024" RenderTransformOrigin="0.5,0.5">
-	<Window.RenderTransform>
-		<TransformGroup>
-			<ScaleTransform/>
-			<SkewTransform/>
-			<RotateTransform Angle="0"/>
-			<TranslateTransform/>
-		</TransformGroup>
-	</Window.RenderTransform>
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="0*"/>
-			<ColumnDefinition Width="107*"/>
-			<ColumnDefinition Width="810*"/>
-			<ColumnDefinition Width="107*"/>
-		</Grid.ColumnDefinitions>
-		<StackPanel Grid.ColumnSpan="4">
-			<StackPanel.Background>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="#FFE1E3E4" Offset="0.904"/>
-					<GradientStop Color="#FF00B2FD" Offset="0.012"/>
-					<GradientStop Color="#FF75C6EA" Offset="0.443"/>
-				</LinearGradientBrush>
-			</StackPanel.Background>
-			<Rectangle Height="120" Stroke="#FF06509E" StrokeThickness =" 5"  Width="1023" RenderTransformOrigin="0.459,0.53" Fill="White"/>
-			<Image Height="159" Width="335" Source="/logoOriginal.png" RenderTransformOrigin="0.5,0.5">
-				<Image.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform/>
-						<TranslateTransform X="-220" Y="-140"/>
-					</TransformGroup>
-				</Image.RenderTransform>
-			</Image>
-			<ComboBox x:Name="MenuCB" Height="45" Width="166" RenderTransformOrigin="0.5,1"
+    <Window.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform/>
+            <SkewTransform/>
+            <RotateTransform Angle="0"/>
+            <TranslateTransform/>
+        </TransformGroup>
+    </Window.RenderTransform>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="810*"/>
+            <ColumnDefinition Width="107*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="4">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE1E3E4" Offset="0.904"/>
+                    <GradientStop Color="#FF00B2FD" Offset="0.012"/>
+                    <GradientStop Color="#FF75C6EA" Offset="0.443"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <Rectangle Height="120" Stroke="#FF06509E" StrokeThickness =" 5"  Width="1023" RenderTransformOrigin="0.459,0.53" Fill="White"/>
+            <Image Height="159" Width="335" Source="/logoOriginal.png" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-220" Y="-140"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <ComboBox x:Name="MenuCB" Height="45" Width="166" RenderTransformOrigin="0.5,1"
 					  Text="Menu"  IsEditable="True" FontSize="24" 
 					  FontFamily="Arial Rounded MT Bold" HorizontalAlignment="Center"
 					  VerticalAlignment="Center" VerticalContentAlignment="Center" 
 					  HorizontalContentAlignment="Center" Foreground="#FF06509E" 
-					 BorderThickness="3"  Background="#FF06509E" SelectionChanged="MenuCB_SelectionChanged"
+					 BorderThickness="3"  Background="#FF06509E" 
+                      SelectionChanged="MenuCB_SelectionChanged"
 					  >
-				<ComboBox.BorderBrush>
-					<SolidColorBrush Color="#FF06509E"/>
-				</ComboBox.BorderBrush>
-				<ComboBox.OpacityMask>
-					<SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}"/>
-				</ComboBox.OpacityMask>
-				<ComboBox.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform/>
-						<TranslateTransform X="305" Y="-240"/>
-					</TransformGroup>
-				</ComboBox.RenderTransform>
-				<ComboBoxItem Content="ComboBoxItem"/>
-				<ComboBoxItem Content="ComboBoxItem"/>
-			</ComboBox>
-			<GroupBox x:Name="FeedbackGB" Height="426" Header="Feedback"/>
-		</StackPanel>
-	</Grid>
+                <ComboBox.BorderBrush>
+                    <SolidColorBrush Color="#FF06509E"/>
+                </ComboBox.BorderBrush>
+                <ComboBox.OpacityMask>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}"/>
+                </ComboBox.OpacityMask>
+                <ComboBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="305" Y="-240"/>
+                    </TransformGroup>
+                </ComboBox.RenderTransform>
+            </ComboBox>
+            <GroupBox x:Name="FeedbackGB" Height="426" Header="Feedback" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" >
+                <GroupBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0"/>
+                    </TransformGroup>
+                </GroupBox.RenderTransform>
+            </GroupBox>
+            <GroupBox x:Name="SymptomsGB" Height="635" Header="" RenderTransformOrigin="0.5,0.5" 
+                      BorderBrush="{x:Null}">
+                <Grid>
+                    <RichTextBox RenderTransformOrigin="0.5,0.5" Margin="371,294,-147,193">
+                        <RichTextBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="-851" X="-265"/>
+                            </TransformGroup>
+                        </RichTextBox.RenderTransform>
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text ="Enter your symptoms"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Button Content="" RenderTransformOrigin="0.5,0.5" Margin="455,294,439,286" Background="#FF57ABD1" BorderBrush="#FF75C6EA">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="-704" X="321"/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Label Content="Find your doctor" RenderTransformOrigin="0.5,0.5" Margin="106,294,118,285" FontFamily="Arial Rounded MT Bold" FontSize="22" Foreground="#FF06509E" HorizontalAlignment="Center">
+                        <Label.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="-915"/>
+                            </TransformGroup>
+                        </Label.RenderTransform>
+                    </Label>
+                    <Label Content="---" Height="25" RenderTransformOrigin="0.5,0.5" Margin="-230,267,454,320">
+                        <Label.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="-616" X="336"/>
+                            </TransformGroup>
+                        </Label.RenderTransform>
+                    </Label>
+                    <ListBox d:ItemsSource="{d:SampleData ItemCount = 5}" RenderTransformOrigin="0.5,0.5" Margin="106,256,118,110">
+                        <ListBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="-577"/>
+                            </TransformGroup>
+                        </ListBox.RenderTransform>
+                    </ListBox>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
 </Window>
