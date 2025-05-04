@@ -915,7 +915,7 @@ namespace DHelp
             }
             string text = data["address"]?["city"]?.ToString() ?? data["address"]?["town"]?.ToString() ??
                             data["address"]?["village"]?.ToString() ?? "City not found";
-            city = "Blagoevgrad";
+            city = text;
         }
         public async Task<string> GetPublicIP()
         {
