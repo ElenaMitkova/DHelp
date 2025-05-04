@@ -1,11 +1,13 @@
-﻿<Window x:Class="DHelp.MainWindow"
+﻿<Window x:Name="DHelp" x:Class="DHelp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DHelp"
+        xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
-        Title="MainWindow" Height="765" Width="1024" RenderTransformOrigin="0.5,0.5">
+        Title="DHelp" Height="765" Width="1024" RenderTransformOrigin="0.5,0.5" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.RenderTransform>
         <TransformGroup>
             <ScaleTransform/>
@@ -14,23 +16,63 @@
             <TranslateTransform/>
         </TransformGroup>
     </Window.RenderTransform>
-    <Grid>
+    <Grid Height="765">
+        <Grid.Background>
+            <ImageBrush ImageSource="/exit1.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="106*"/>
+            <RowDefinition Height="149*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"/>
             <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="99*"/>
             <ColumnDefinition Width="810*"/>
             <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="4">
+        <StackPanel Grid.ColumnSpan="5" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,17" Grid.RowSpan="2">
+            <StackPanel.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0"/>
+                </TransformGroup>
+            </StackPanel.RenderTransform>
             <StackPanel.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFE1E3E4" Offset="0.904"/>
-                    <GradientStop Color="#FF00B2FD" Offset="0.012"/>
-                    <GradientStop Color="#FF75C6EA" Offset="0.443"/>
+                    <GradientStop Color="#FF85CBEA" Offset="0.426"/>
+                    <GradientStop Color="#FF2EAEF3" Offset="0"/>
+                    <GradientStop Color="#FF85CBEA" Offset="0.28"/>
+                    <GradientStop Color="#FF49B7F2" Offset="0.162"/>
+                    <GradientStop Color="White" Offset="0.907"/>
                 </LinearGradientBrush>
             </StackPanel.Background>
-            <Rectangle Height="120" Stroke="#FF06509E" StrokeThickness =" 5"  Width="1023" RenderTransformOrigin="0.459,0.53" Fill="White"/>
-            <Image Height="159" Width="335" Source="/logoOriginal.png" RenderTransformOrigin="0.5,0.5">
+
+            <Rectangle Height="120" Stroke="#FF06509E" StrokeThickness =" 7"  Width="1014" 
+                       RenderTransformOrigin="0.459,0.53" Fill="White" HorizontalAlignment="Center">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-2"/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle HorizontalAlignment="Left" Height="292" Margin="912,-306,0,0" Width="20" Fill="#FF06509E" RenderTransformOrigin="0.52,0.506">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-0.8"/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Image x:Name="logo" Height="159" Width="336" Source="/logoOriginal.png" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -41,16 +83,11 @@
                 </Image.RenderTransform>
             </Image>
             <ComboBox x:Name="MenuCB" Height="45" Width="166" RenderTransformOrigin="0.5,1"
-					  Text="Menu"  IsEditable="True" FontSize="24" 
-					  FontFamily="Arial Rounded MT Bold" HorizontalAlignment="Center"
-					  VerticalAlignment="Center" VerticalContentAlignment="Center" 
+					  Text="Home" FontSize="24" 
+					  FontFamily="Arial Rounded MT Bold" VerticalContentAlignment="Center" 
 					  HorizontalContentAlignment="Center" Foreground="#FF06509E" 
 					 BorderThickness="3"  Background="#FF06509E" 
-                      SelectionChanged="MenuCB_SelectionChanged"
-					  >
-                <ComboBox.BorderBrush>
-                    <SolidColorBrush Color="#FF06509E"/>
-                </ComboBox.BorderBrush>
+                      SelectionChanged="MenuCB_SelectionChanged" IsReadOnly="True" IsSynchronizedWithCurrentItem="False" AutomationProperties.Name="Menu" SelectedIndex="0" IsTabStop="True" IsEditable="True" BorderBrush="#FF06509E" >
                 <ComboBox.OpacityMask>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}"/>
                 </ComboBox.OpacityMask>
@@ -63,76 +100,583 @@
                     </TransformGroup>
                 </ComboBox.RenderTransform>
             </ComboBox>
-            <GroupBox x:Name="FeedbackGB" Height="426" Header="Feedback" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" >
+            <GroupBox x:Name="gbHomePage" Height="640" Header="" Width="1040" Visibility="Visible" RenderTransformOrigin="0.5,0.5" BorderThickness ="0" AutomationProperties.IsOffscreenBehavior="Onscreen" BorderBrush="Transparent" Margin="0,0,0,0">
                 <GroupBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
                         <RotateTransform/>
-                        <TranslateTransform X="0"/>
+                        <TranslateTransform Y="-200"/>
                     </TransformGroup>
                 </GroupBox.RenderTransform>
-            </GroupBox>
-            <GroupBox x:Name="SymptomsGB" Height="635" Header="" RenderTransformOrigin="0.5,0.5" 
-                      BorderBrush="{x:Null}">
-                <Grid>
-                    <RichTextBox RenderTransformOrigin="0.5,0.5" Margin="371,294,-147,193">
-                        <RichTextBox.RenderTransform>
+                <Grid Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" Height="634" VerticalAlignment="Top" Width="1024">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="239*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
+                    <MediaElement x:Name="mediaElementHeartbeat" Visibility="Visible" LoadedBehavior="Manual" UnloadedBehavior="Manual" Stretch="Uniform" HorizontalAlignment="Left" Height="673" Margin="-81,-55,0,0" VerticalAlignment="Top" Width="1078"  Grid.ColumnSpan="3" MediaEnded="mediaElementHeartbeat_MediaEnded" Loaded="mediaElementHeartbeat_Loaded" RenderTransformOrigin="0.495,0.499" Source="cardiogram-video.mp4" >
+                        <MediaElement.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
                                 <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform Y="-851" X="-265"/>
+                                <RotateTransform Angle="-0.311"/>
+                                <TranslateTransform/>
                             </TransformGroup>
-                        </RichTextBox.RenderTransform>
+                        </MediaElement.RenderTransform>
+                    </MediaElement>
+                    <RichTextBox x:Name="rtbHome" Visibility="Hidden" HorizontalAlignment="Left" Margin="164,142,0,364" Width="696" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" Focusable="False" IsReadOnlyCaretVisible="True">
                         <FlowDocument>
-                            <Paragraph>
-                                <Run Text ="Enter your symptoms"/>
+                            <Paragraph TextAlignment="Justify">
+                                <Run x:Name="rtbHomePage"  Text="Tired of endless searches for the right specialist? Our app makes it simple. Just enter your symptoms, and instantly get a list of doctors, along with their office locations, tailored to where you are. We’re here to make healthcare more accessible by connecting you with the right professionals, quickly and easily — no hassle, no waiting." FontFamily="Arial Rounded MT Bold"/>
                             </Paragraph>
                         </FlowDocument>
                     </RichTextBox>
-                    <Button Content="" RenderTransformOrigin="0.5,0.5" Margin="455,294,439,286" Background="#FF57ABD1" BorderBrush="#FF75C6EA">
-                        <Button.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform Y="-704" X="321"/>
-                            </TransformGroup>
-                        </Button.RenderTransform>
-                    </Button>
-                    <Label Content="Find your doctor" RenderTransformOrigin="0.5,0.5" Margin="106,294,118,285" FontFamily="Arial Rounded MT Bold" FontSize="22" Foreground="#FF06509E" HorizontalAlignment="Center">
+                    <Label x:Name="lblTitleHomePage" Visibility="Hidden" Content="Find the Right Doctor in a Few Clicks" RenderTransformOrigin="0.5,0.5" Margin="311,54,0,525" FontFamily="Arial Rounded MT Bold" FontSize="22" Foreground="#FF06509E" HorizontalAlignment="Left" FontWeight="Bold">
                         <Label.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
                                 <SkewTransform/>
                                 <RotateTransform/>
-                                <TranslateTransform Y="-915"/>
+                                <TranslateTransform Y="0"/>
                             </TransformGroup>
                         </Label.RenderTransform>
                     </Label>
-                    <Label Content="---" Height="25" RenderTransformOrigin="0.5,0.5" Margin="-230,267,454,320">
-                        <Label.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform Y="-616" X="336"/>
-                            </TransformGroup>
-                        </Label.RenderTransform>
-                    </Label>
-                    <ListBox d:ItemsSource="{d:SampleData ItemCount = 5}" RenderTransformOrigin="0.5,0.5" Margin="106,256,118,110">
-                        <ListBox.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform Y="-577"/>
-                            </TransformGroup>
-                        </ListBox.RenderTransform>
-                    </ListBox>
+                    <Rectangle Margin="-14,564,0,-20" Stretch="Fill" Fill="#FF06509E" Stroke="#FF06509E" StrokeThickness="1" Width="2022" Grid.Row="0" Grid.ColumnSpan="2" />
                 </Grid>
             </GroupBox>
+            <GroupBox x:Name="gbSymptom" Height="659" Header="" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" Focusable="True" BorderThickness="0" MouseDown="gbSymptom_MouseDown" Width="1028" >
+                <GroupBox.Foreground>
+                    <ImageBrush/>
+                </GroupBox.Foreground>
+                <GroupBox.BorderBrush>
+                    <ImageBrush/>
+                </GroupBox.BorderBrush>
+                <GroupBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-855" X="0"/>
+                    </TransformGroup>
+                </GroupBox.RenderTransform>
+                <Grid>
+                    <Grid/>
+                    <Label Content="Find your doctor" RenderTransformOrigin="0.5,0.5" Margin="0,73,0,484" FontFamily="Arial Rounded MT Bold" FontSize="22" Foreground="#FF06509E" HorizontalAlignment="Center" Width="186">
+                        <Label.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="0"/>
+                            </TransformGroup>
+                        </Label.RenderTransform>
+                    </Label>
+                    <Menu x:Name="menuSymptoms" HorizontalAlignment="Center" Height="84" VerticalAlignment="Top" Width="788" Margin="0,185,0,0">
+                        <MenuItem x:Name="menuItemPain" Header="Pain"  Height="28" Width="60" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemPain_MouseMove" MouseLeave="menuItemPain_MouseLeave" >
+                            <Separator />
+                            <MenuItem x:Name="miBackPain" Header="Back pain" Click="miBackPain_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miBurningLimbs" Header="Burning sensation in limbs" Click="miBurningLimbs_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miKneePain" Header="Knee pain" Click="miKneePain_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miHeadache" Header="Headache" Click="miHeadache_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miAbdominalPain" Header="Abdominal pain" Click="miAbdominalPain_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miMenstrualCramps" Header="Menstrual cramps" Click="miMenstrualCramps_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miChestPain" Header="Chest pain" Click="miChestPain_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miJointPain" Header="Joint pain" Click="miJointPain_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miNeckPain" Header="Neck pain" Click="miNeckPain_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miFootPain" Header="Foot pain" Click="miFootPain_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miPainSurgery" Header="Pain after surgery" Click="miPainSurgery_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miToothache" Header="Toothache" Click="miToothache_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miMusclePain" Header="Muscle pain" Click="miMusclePain_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miPressurePain" Header="Pain on pressure" Click="miPressurePain_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miBurnSensSkin" Header="Burning sensation on skin" Click="miBurnSensSkin_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemFocus" Header="Focus and memory" Height="28" Width="167" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemFocus_MouseMove" MouseLeave="menuItemFocus_MouseLeave">
+                            <Separator/>
+                            <MenuItem x:Name="miForgetfulness" Header="Forgetfulness" Click="miForgetfulness_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miConcentratingDif" Header="Difficulty concentrating" Click="miConcentratingDif_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miAbsentMind" Header="Absent-mindedness" Click="miAbsentMind_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuStressAndAnxiety" Header="Stress and anxiety" Height="28" Width="166" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuStressAndAnxiety_MouseMove" MouseLeave="menuStressAndAnxiety_MouseLeave">
+                            <Separator/>
+                            <MenuItem x:Name="miDepression" Header="Depression" Click="miDepression_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miAnxiety" Header="Anxiety" Click="miAnxiety_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miInferiority" Header="Inferiority complex" Click="miInferiority_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemEating" Header="Eating disorders" Height="28" Width="147" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemEating_MouseMove" MouseLeave="menuItemEating_MouseLeave">
+                            <Separator/>
+                            <MenuItem x:Name="miIncreasedAppetite" Header="Appetite - increased" Click="miIncreasedAppetite_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miLossAppetite" Header="Loss of appetite" Click="miLossAppetite_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miSwallowingDif" Header="Difficulty swallowing" Click="miSwallowingDif_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemDiscomfort" Header="Discomfort" Height="28" Width="112" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemDiscomfort_MouseMove" MouseLeave="menuItemDiscomfort_MouseLeave">
+                            <Separator/>
+                            <MenuItem x:Name="miNausea" Header="Nausea and vomiting" Click="miNausea_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miFaintness" Header="Faintness" Click="miFaintness_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miChills" Header="Chills" Click="miChills_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDiarrhea" Header="Diarrhea" Click="miDiarrhea_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miConstipation" Header="Constipation" Click="miConstipation_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemSleeping" Header="Sleep disorders" Height="28" Width="136" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" RenderTransformOrigin="0.502,0.546" MouseMove="menuItemSleeping_MouseMove" MouseLeave="menuItemSleeping_MouseLeave">
+                            <Separator/>
+                            <MenuItem x:Name="miInsomnia" Header="Insomnia" Click="miInsomnia_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miSleepDisturbances" Header="Sleep disturbances" Click="miSleepDisturbances_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miSleepWalking" Header="Sleepwalking" Click="miSleepWalking_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miRaving" Header="Raving" Click="miRaving_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemFatigue" Header="Fatigue and drowsiness" Height="28" Width="217" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemFatigue_MouseMove" MouseLeave="menuItemFatigue_MouseLeave">
+                            <Separator/>
+                            <MenuItem x:Name="miSleepiness" Header="Excessive sleepiness" Click="miSleepiness_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miFatigue" Header="Fatigue" Click="miFatigue_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miFaintness2" Header="Faintness" Click="miFaintness2_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemSkin" Header="Skin diseases" Height="28" Width="143" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemSkin_MouseMove" MouseLeave="menuItemSkin_MouseLeave">
+                            <Separator/>
+                            <MenuItem x:Name="miSkinRash" Header="Skin rash" Click="miSkinRash_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miItchySkin" Header="Itchy skin" Click="miItchySkin_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miBurnsScalds" Header="Burns and scalds" Click="miBurnsScalds_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miAcne" Header="Acne" Click="miAcne_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miPsoriasis" Header="Psoriasis" Click="miPsoriasis_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miEczema" Header="Eczema" Click="miEczema_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemHeart" Header="Cardiovascular diseases" Height="28" Width="242" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemHeart_MouseMove" MouseLeave="menuItemHeart_MouseLeave">
+                            <Separator />
+                            <MenuItem x:Name="miPalpitations" Header="Heart palpitations" Click="miPalpitations_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miHeartbeat" Header="Heartbeat" Click="miHeartbeat_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miShortnessOfBreath" Header="Shortness of breath" Click="miShortnessOfBreath_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemWeight" Header="Weight fluctation" Height="28" Width="186" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemWeight_MouseMove" MouseLeave="menuItemWeight_MouseLeave">
+                            <Separator />
+                            <MenuItem x:Name="miWeightLoss" Header="Weight loss" Click="miWeightLoss_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miFluidRetention" Header="Fluid retention" Click="miFluidRetention_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemEye" Header="Eye diseases" Height="28" Width="142" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemEye_MouseMove" MouseLeave="menuItemEye_MouseLeave">
+                            <Separator />
+                            <MenuItem x:Name="miBlurredVision" Header="Blurred vision" Click="miBlurredVision_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDryEyes" Header="Dry eyes" Click="miDryEyes_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miEyeIrritation" Header="Eye irritation" Click="miEyeIrritation_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemAllergy" Header="Allergies" Height="28" Width="134" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemAllergy_MouseMove" MouseLeave="menuItemAllergy_MouseLeave">
+                            <Separator />
+                            <MenuItem x:Name="miRash" Header="Rash" Click="miRash_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miItch" Header="Itch" Click="miItch_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miAllergy" Header="Allergy" Click="miAllergy_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemInfection" Header="Infections" Height="28" Width="132" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemInfection_MouseMove" MouseLeave="menuItemInfection_MouseLeave">
+                            <Separator />
+                            <MenuItem x:Name="miRecurrentInfections" Header="Recurrent infections" Click="miRecurrentInfections_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miBacterialInfections" Header="Bacterial infections" Click="miBacterialInfections_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miVIralInfections" Header="Viral infections" Click="miVIralInfections_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miFungalInfections" Header="Fungal infections" Click="miFungalInfections_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemStomach" Header="Gastrointestinal diseases" Height="28" Width="250" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemStomach_MouseMove" MouseLeave="menuItemStomach_MouseLeave">
+                            <Separator />
+                            <MenuItem x:Name="miIndigestion" Header="Indigestion" Click="miIndigestion_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDistendedAbdomen" Header="Distended Abdomen" Click="miDistendedAbdomen_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miWeightLoss2" Header="Weight loss" Click="miWeightLoss2_Click" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem x:Name="menuItemOthers" Header="Others" Height="28" Width="130" FontFamily="Arial Rounded MT Bold" FontSize="16" BorderBrush="#FF06509E" MouseMove="menuItemOthers_MouseMove" MouseLeave="menuItemOthers_MouseLeave">
+                            <Separator />
+                            <MenuItem x:Name="miMoodSwings" Header="Mood swings" Click="miMoodSwings_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miMemoryProblems" Header="Memory problems" Click="miMemoryProblems_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDryMouth" Header="Dry mouth" Click="miDryMouth_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miLimbNumbness" Header="Limb numbness" Click="miLimbNumbness_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDizziness" Header="Dizziness" Click="miDizziness_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miPoorConcentration" Header="Poor concentration" Click="miPoorConcentration_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miConstantFatigue" Header="Constant fatigue" Click="miConstantFatigue_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miCough" Header="Cough" Click="miCough_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miFrequentHeadache" Header="Frequent headache" Click="miFrequentHeadache_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miBalanceDisorders" Header="Balance disorders" Click="miBalanceDisorders_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDrainageWater" Header="Drainage water" Click="miDrainageWater_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miWeakImmuneSystem" Header="Weak immune system" Click="miWeakImmuneSystem_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miHairLoss" Header="Hair loss" Click="miHairLoss_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miSkinColor" Header="Skin discoloration or pigmentation" Click="miSkinColor_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miSensitiveTeeth" Header="Sensitive teeth" Click="miSensitiveTeeth_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miSneezing" Header="Sneezing" Click="miSneezing_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miConstantThirst" Header="Constant thirst" Click="miConstantThirst_Click" />
+                            <Separator />
+                        </MenuItem>
+                    </Menu>
+                    <Label x:Name="lblYourSymptom" Visibility="Hidden" Content="Your symptom: " RenderTransformOrigin="0.5,0.5" Margin="114,290,508,304" FontFamily="Arial Rounded" FontSize="20" Foreground="#FF06509E" HorizontalContentAlignment="Left">
+                        <Label.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="0"/>
+                            </TransformGroup>
+                        </Label.RenderTransform>
+                    </Label>
+                    <Grid x:Name="gridSymptoms" HorizontalAlignment="Center" Height="467" Margin="0,274,0,0" VerticalAlignment="Top" Width="1055">
+                        <Image HorizontalAlignment="Left" Height="152" Margin="856,227,0,0" VerticalAlignment="Top" Width="155" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-29.512"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image HorizontalAlignment="Left" Height="104" Margin="768,149,0,0" VerticalAlignment="Top" Width="88" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="69.357"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image HorizontalAlignment="Left" Height="94" Margin="908,89,0,0" VerticalAlignment="Top" Width="99" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="357.832"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image HorizontalAlignment="Left" Height="125" Margin="583,117,0,0" VerticalAlignment="Top" Width="129" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="184.333"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image HorizontalAlignment="Left" Height="130" Margin="686,282,0,0" VerticalAlignment="Top" Width="98" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="2.215"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image HorizontalAlignment="Left" Height="152" Margin="206,177,0,0" VerticalAlignment="Top" Width="155" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-1.039"/>
+                                    <TranslateTransform X="-40.06" Y="54.269"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image HorizontalAlignment="Left" Height="104" VerticalAlignment="Top" Width="88" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="97.83"/>
+                                    <TranslateTransform X="26.264" Y="5.743"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image HorizontalAlignment="Left" Height="94" Margin="4,60,0,0" VerticalAlignment="Top" Width="99" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="386.305"/>
+                                    <TranslateTransform X="36.323" Y="85.925"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image HorizontalAlignment="Left" Height="83" Margin="460,313,0,0" VerticalAlignment="Top" Width="97" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="212.806"/>
+                                    <TranslateTransform X="53.592" Y="-69.024"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image HorizontalAlignment="Left" Height="130" Margin="57,314,0,0" VerticalAlignment="Top" Width="98" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="30.688"/>
+                                    <TranslateTransform X="-37.322" Y="-45.977"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image HorizontalAlignment="Left" Height="83" Margin="285,328,0,0" VerticalAlignment="Top" Width="97" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="259.932"/>
+                                    <TranslateTransform X="53.592" Y="-69.024"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image HorizontalAlignment="Left" Height="143" Margin="414,148,0,0" VerticalAlignment="Top" Width="129" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-107.932"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image HorizontalAlignment="Left" Height="83" Margin="200,195,0,0" VerticalAlignment="Top" Width="97" Source="/magnifying-glass-icon.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="259.932"/>
+                                    <TranslateTransform X="53.592" Y="-69.024"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/magnifying-glass-icon.png" Stretch="UniformToFill"/>
+                            </Image.OpacityMask>
+                        </Image>
+                    </Grid>
+                    <ListBox x:Name="lstDoctors" HorizontalAlignment="Center" Margin="0,374,0,77" Width="902" Visibility="Hidden" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="Consolas" FontSize="14" Foreground="#FF06509E" MouseLeftButtonUp="lstDoctors_MouseLeftButtonUp"/>
+                    <Label x:Name="lblRecommendation" Visibility="Hidden" Content="We recommend you visit:" RenderTransformOrigin="0.5,0.5" Margin="114,332,0,262" FontFamily="Arial Rounded" FontSize="20" Foreground="#FF06509E" HorizontalAlignment="Left" Width="394">
+                        <Label.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="0"/>
+                            </TransformGroup>
+                        </Label.RenderTransform>
+                    </Label>
+                </Grid>
+            </GroupBox>
+            <GroupBox x:Name="gbFeedback" Height="642" Header="" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,0" Focusable="True" BorderThickness="0" BorderBrush="Transparent" Width="1024" Background="Transparent" Visibility="Hidden" MouseDown="gbFeedback_MouseDown" >
+                <GroupBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="1" Y="-1505"/>
+                    </TransformGroup>
+                </GroupBox.RenderTransform>
+                <Grid Height="645" RenderTransformOrigin="0.47,0.503">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="38"/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="975"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="imageNoReview" HorizontalAlignment="Left" Height="56" Margin="348,213,0,0" VerticalAlignment="Top" Width="298" Source="/noEmotions.png" Visibility="Visible" />
+                    <Image x:Name="image1starReview" HorizontalAlignment="Left" Height="56" Margin="348,213,0,0" VerticalAlignment="Top" Width="298" Source="/emotions-1.png" Visibility="Hidden"/>
+                    <Image x:Name="image2starReview" HorizontalAlignment="Left" Height="56" Margin="348,213,0,0" VerticalAlignment="Top" Width="298" Source="/emotions-2.png" Visibility="Hidden" />
+                    <Image x:Name="image3starReview" HorizontalAlignment="Left" Height="56" Margin="348,213,0,0" VerticalAlignment="Top" Width="298" Source="/emotions-3.png" Visibility="Hidden" />
+                    <Image x:Name="image4starReview" HorizontalAlignment="Left" Height="56" Margin="348,213,0,0" VerticalAlignment="Top" Width="298" Source="/emotions-4.png" Visibility="Hidden" />
+                    <Image x:Name="image5starReview" HorizontalAlignment="Left" Height="56" Margin="348,213,0,0" VerticalAlignment="Top" Width="298" Source="/emotions-5.png" Visibility="Hidden" />
+                    <Button x:Name="btnReview1" Focusable="True" Content="" HorizontalAlignment="Left" Height="56" Margin="351,213,0,0" VerticalAlignment="Top" Width="54" Click="btnReview1_Click" BorderBrush="{x:Null}" MouseMove="btnReview1_Hover" Foreground="{x:Null}" Background="White" Opacity="0" MouseLeave="btnReview1_Leave" IsEnabled="True" />
+                    <Button x:Name="btnReview2" Focusable="True" Content="" HorizontalAlignment="Left" Height="56" Margin="405,213,0,0" VerticalAlignment="Top" Width="58" Click="btnReview2_Click" Background="White" BorderBrush="{x:Null}" Foreground="{x:Null}" MouseMove="btnReview2_Hover" Opacity="0" MouseLeave="btnReview2_Leave" IsEnabled="True"/>
+                    <Button x:Name="btnReview3" Focusable="True" Content="" HorizontalAlignment="Left" Height="56" Margin="460,213,0,0" VerticalAlignment="Top" Width="60" Click="btnReview3_Click" Background="White" BorderBrush="{x:Null}" Foreground="{x:Null}" MouseMove="btnReview3_Hover" Opacity="0" MouseLeave="btnReview3_Leave" IsEnabled="True"/>
+                    <Button x:Name="btnReview4" Focusable="True" Content="" HorizontalAlignment="Left" Height="56" Margin="517,213,0,0" VerticalAlignment="Top" Width="59" Click="btnReview4_Click" Background="White" BorderBrush="{x:Null}" Foreground="{x:Null}" MouseMove="btnReview4_Hover" Opacity="0" MouseLeave="btnReview4_Leave" IsEnabled="True"/>
+                    <Button x:Name="btnReview5" Focusable="True" Content="" HorizontalAlignment="Left" Height="56" Margin="573,213,0,0" VerticalAlignment="Top" Width="55" Click="btnReview5_Click" Background="White" BorderBrush="{x:Null}" Foreground="{x:Null}" MouseMove="btnReview5_Hover" Opacity="0" MouseLeave="btnReview5_Leave" IsEnabled="True"/>
+                    <Button x:Name="btnSendFeedback" Content="Send my feedback" Foreground  =" #FF06509F" HorizontalAlignment="Left" Margin="362,323,0,0" Width="238" RenderTransformOrigin="0.501,0.539" FontFamily="Arial Rounded MT Bold" FontSize="20" Height="38" VerticalAlignment="Top" BorderThickness="1" BorderBrush="#FF06509F" Click="btnSendFeedback_Click"/>
+                    <ComboBox x:Name="cbSearchHistory" Text=" --Search history--" BorderThickness="1" HorizontalAlignment="Center" Height="29" Margin="0,146,0,0" VerticalAlignment="Top" Width="324" RenderTransformOrigin="0.51,0.536" IsEditable="True" FontSize="18" HorizontalContentAlignment="Center" IsReadOnly="True" FontFamily="Arial Rounded MT Bold" Foreground="#FF9C9CA4" BorderBrush="#FF06509F" Panel.ZIndex="2"/>
+                    <Label x:Name="lblFeedback" Content="Please give your feedback" HorizontalAlignment="Center" Margin="0,50,0,546" Width="324" FontFamily="Arial Rounded MT Bold" 
+       FontSize="24" Foreground="#FF06509E" Visibility="Visible"/>
+                    <!--<RichTextBox x:Name="rtbComment" HorizontalAlignment="Center" Margin="0,288,0,155" Width="324" 
+             RenderTransformOrigin="0.497,0.474" BorderThickness="1" Background="White" FontSize="16" GotFocus="rtbComment_GotFocus" FontFamily="Arial Rounded MT Bold" Foreground="#FF9C9CA4" BorderBrush="#FFBABAC5" Visibility="Visible">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="Write a comment..."/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox x:Name="rtbCommentWriting" HorizontalAlignment="Center" Margin="0,288,0,155" Width="324" 
+                        RenderTransformOrigin="0.497,0.474" BorderThickness="1" Background="White" FontSize="16" FontFamily="Arial Rounded MT Bold" Foreground="Black" LostFocus="rtbCommentWriting_LostFocus" BorderBrush="#FFB5AAAA" Visibility="Hidden">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>-->
+
+                </Grid>
+            </GroupBox>
+            <GroupBox x:Name="gbMap" Height="626" Header="" Width="1024" Visibility="Hidden" Margin="0,0,0,0" RenderTransformOrigin="0.5,0" BorderThickness ="0" BorderBrush="Transparent">
+                <GroupBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-2138"/>
+                    </TransformGroup>
+                </GroupBox.RenderTransform>
+                <Grid>
+                    <cef:ChromiumWebBrowser x:Name="MapDoctors" Visibility="Visible" Address="https://www.google.com/maps" Height="518" Margin="48,0,36,0">
+                        <cef:ChromiumWebBrowser.CacheMode>
+                            <BitmapCache/>
+                        </cef:ChromiumWebBrowser.CacheMode>
+                    </cef:ChromiumWebBrowser>
+                    <Button x:Name="btn_Back" Foreground  =" #FF06509F" FontFamily="Arial Rounded MT Bold" BorderThickness="1" BorderBrush="#FF06509F" Margin="856,6,36,565" Background="#FFDDDDDD" AutomationProperties.HelpText="" Content="Back" FontSize="14" Click="btn_Back_Click" />
+                </Grid>
+            </GroupBox>
+            <Rectangle HorizontalAlignment="Left" Height="292" Margin="912,-306,0,0" Width="20" Fill="#FF06509E" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
         </StackPanel>
+        <Ellipse x:Name="btnExit1" Grid.Column="4" HorizontalAlignment="Center" Height="49" Margin="0,40,0,0" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" MouseLeave="btnExit1_MouseLeave" MouseLeftButtonDown="btnExit1_MouseLeftButtonDown">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="13" Y="-4"/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+            <Ellipse.Fill>
+                <ImageBrush x:Name="None" TileMode="None" ImageSource="/exit1.png" Stretch="UniformToFill"/>
+            </Ellipse.Fill>
+        </Ellipse>
+        <Ellipse x:Name="btnExit" Grid.Column="4" HorizontalAlignment="Center" Height="49" Margin="0,40,0,0" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.5,0.5" Visibility="Visible" MouseMove="btnExit_MouseMove">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="13" Y="-4"/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+            <Ellipse.Fill>
+                <ImageBrush TileMode="None" ImageSource="/exit.png" Stretch="UniformToFill"/>
+            </Ellipse.Fill>
+        </Ellipse>
     </Grid>
 </Window>
