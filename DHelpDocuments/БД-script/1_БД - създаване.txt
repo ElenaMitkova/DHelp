@@ -1,0 +1,122 @@
+create database DHelpEN;
+use DHelpEN;
+CREATE TABLE Doctors (
+    ID INT PRIMARY KEY NOT NULL,
+    Specialist VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Allergies (
+    ID INT PRIMARY KEY NOT NULL,
+    Allergies VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE CardiovascularDiseases (
+    ID INT PRIMARY KEY NOT NULL,
+    CardiovascularDiseases VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE Discomfort (
+    ID INT PRIMARY KEY NOT NULL,
+    Discomfort VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE EatingDisorders (
+    ID INT PRIMARY KEY NOT NULL,
+    EatingDisorders VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE EyeDiseases (
+    ID INT PRIMARY KEY NOT NULL,
+    EyeDiseases VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE FatigueAndDrowsiness (
+    ID INT PRIMARY KEY NOT NULL,
+    FatigueAndDrowsiness VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE FocusAndMemory (
+    ID INT PRIMARY KEY NOT NULL,
+    FocusAndMemory VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE GastrointestinalDiseases (
+    ID INT PRIMARY KEY NOT NULL,
+    GastrointestinalDiseases VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE Infections (
+    ID INT PRIMARY KEY NOT NULL,
+    Infections VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE Pain (
+    ID INT PRIMARY KEY NOT NULL,
+    Pain VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE SkinDiseases (
+    ID INT PRIMARY KEY NOT NULL,
+    SkinDiseases VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE SleepDisorders (
+    ID INT PRIMARY KEY NOT NULL,
+    SleepDisorders VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE StressAndAnxiety (
+    ID INT PRIMARY KEY NOT NULL,
+    StressAndAnxiety VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE WeightFluctation (
+    ID INT PRIMARY KEY NOT NULL,
+    WeightFluctation VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+
+CREATE TABLE Others (
+    ID INT PRIMARY KEY NOT NULL,
+    Others VARCHAR(50) NOT NULL,
+    SpecialistID INT NULL,
+    FOREIGN KEY (SpecialistID) REFERENCES Doctors(ID)
+);
+CREATE TABLE DoctorsInformation (
+
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    DoctorName VARCHAR(100) not null,
+    SpecializationNumber int foreign key references Doctors(ID) not null,
+    Location VARCHAR(100) not null,
+    Address VARCHAR(200) not null,
+    PhoneNumber VARCHAR(50),
+    Sum_Rating FLOAT,
+	Count_Rating int
+);

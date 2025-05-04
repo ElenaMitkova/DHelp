@@ -1,0 +1,106 @@
+INSERT INTO Allergies (ID, Allergies, SpecialistID) VALUES
+(1, 'Rash', 6),
+(2, 'Itch', 6),
+(3, 'Allergy', 10);
+
+INSERT INTO CardiovascularDiseases (ID, CardiovascularDiseases, SpecialistID) VALUES
+(1, 'Heart palpitations', 8),
+(2, 'Heartbeat', 8),
+(3, 'Shortness of breath', 5);
+
+INSERT INTO Discomfort (ID, Discomfort, SpecialistID) VALUES
+(1, 'Nausea and vomiting', 4),
+(2, 'Faintness', 2),
+(3, 'Chills', 2),
+(4, 'Diarrhea', 4),
+(5, 'Constipation', 4);
+
+INSERT INTO EatingDisorders (ID, EatingDisorders, SpecialistID) VALUES
+(1, 'Appetite-increased', 3),
+(2, 'Loss of appetite', 3),
+(3, 'Difficulty swallowing', 4);
+
+INSERT INTO EyeDiseases (ID, EyeDiseases, SpecialistID) VALUES
+(1, 'Blurred vision', 9),
+(2, 'Dry eyes', 9),
+(3, 'Eye irritation', 9);
+
+INSERT INTO FatigueAndDrowsiness (ID, FatigueAndDrowsiness, SpecialistID) VALUES
+(1, 'Excessive sleepiness', 2),
+(2, 'Fatigue', 2),
+(3, 'Faintness', 2);
+
+INSERT INTO FocusAndMemory (ID, FocusAndMemory, SpecialistID) VALUES
+(1, 'Forgetfulness', 2),
+(2, 'Difficulty concentrating', 2),
+(3, 'Absent-mindedness', 2);
+
+INSERT INTO GastrointestinalDiseases (ID, GastrointestinalDiseases, SpecialistID) VALUES
+(1, 'Indigestion', 4),
+(2, 'Distended abdomen', 4),
+(3, 'Weight loss', 3);
+
+INSERT INTO Infections (ID, Infections, SpecialistID) VALUES
+(1, 'Recurrent infections', 11),
+(2, 'Bacterial infections', 11),
+(3, 'Viral infections', 11),
+(4, 'Fungal infections', 6);
+
+INSERT INTO Others (ID, Others, SpecialistID) VALUES
+(1, 'Mood swings', 1),
+(2, 'Memory problems', 2),
+(3, 'Dry mouth', 3),
+(4, 'Limb numbness', 2),
+(5, 'Dizziness', 2),
+(6, 'Poor concentration', 2),
+(7, 'Constant fatigue', 2),
+(8, 'Cough', 5),
+(9, 'Frequent headache', 2),
+(10, 'Balance disorders', 2),
+(11, 'Drainage water', 7),
+(12, 'Weak immune system', 12),
+(13, 'Hair loss', 6),
+(14, 'Skin discoloration or pigmentation', 6),
+(15, 'Sensitive teeth', 13),
+(16, 'Sneezing', 14),
+(17, 'Constant thirst', 3);
+
+INSERT INTO Pain (ID, Pain, SpecialistID) VALUES
+(1, 'Back pain', 15),
+(2, 'Burning sensation in limbs', 1),
+(3, 'Knee pain', 16),
+(4, 'Headache', 2),
+(5, 'Abdominal pain', 7),
+(6, 'Menstrual cramps', 17),
+(7, 'Chest pain', 8),
+(8, 'Joint pain', 16),
+(9, 'Neck pain', 16),
+(10, 'Foot pain', 16),
+(11, 'Pain after surgery', 18),
+(12, 'Toothache', 13),
+(13, 'Muscle pain', 16),
+(14, 'Pain on pressure', 16),
+(15, 'Burning sensation on skin', 6);
+
+INSERT INTO SkinDiseases (ID, SkinDiseases, SpecialistID) VALUES
+(1, 'Skin rash', 6),
+(2, 'Itchy skin', 6),
+(3, 'Burns and scalds', 7),
+(4, 'Acne', 6),
+(5, 'Psoriasis', 6),
+(6, 'Eczema', 6);
+
+INSERT INTO SleepDisorders (ID, SleepDisorders, SpecialistID) VALUES
+(1, 'Insomnia', 2),
+(2, 'Sleep disturbances', 2),
+(3, 'Sleepwalking', 2),
+(4, 'Raving', 2);
+
+INSERT INTO StressAndAnxiety (ID, StressAndAnxiety, SpecialistID) VALUES
+(1, 'Depression', 1),
+(2, 'Anxiety', 1),
+(3, 'Inferiority complex', 1);
+
+INSERT INTO WeightFluctation (ID, WeightFluctation, SpecialistID) VALUES
+(1, 'Weight loss', 3),
+(2, 'Fluid retention', 8);
